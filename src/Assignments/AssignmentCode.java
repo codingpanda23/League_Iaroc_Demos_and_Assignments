@@ -27,11 +27,18 @@ public class AssignmentCode extends IRobotAdapter {
 	
 	private void setup() throws Exception {
 		//SETUP CODE GOES HERE!!!!!
+		
 	}
 	
 	private boolean loop() throws Exception{
 		//LOOP CODE GOES HERE!!!!!
-		
+		readSensors(100);
+		driveDirect(300,300);
+		int[] lightBumpReadings = getLightBumps();
+		if (lightBumpReadings[2]>0) {
+			driveDirect(300,-300);
+			sleep(2000);
+			}
 		
 		return true;
 	}
