@@ -6,17 +6,17 @@ import org.jointheleague.ecolban.rpirobot.IRobotAdapter;
 import org.jointheleague.ecolban.rpirobot.IRobotInterface;
 import org.jointheleague.ecolban.rpirobot.SimpleIRobot;
 
-public class AssignmentCode extends IRobotAdapter {
+public class MazeCode extends IRobotAdapter {
 	Sonar sonar = new Sonar();
 	
-	public AssignmentCode(IRobotInterface iRobot) {
+	public MazeCode(IRobotInterface iRobot) {
 		super(iRobot);
 	}
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Try event listner, rev Monday 2030");
 		IRobotInterface base = new SimpleIRobot();
-		AssignmentCode rob = new AssignmentCode(base);
+		MazeCode rob = new MazeCode(base);
 		rob.setup();
 		while(rob.loop()){}
 		rob.shutDown();
@@ -33,12 +33,20 @@ public class AssignmentCode extends IRobotAdapter {
 	private boolean loop() throws Exception{
 		//LOOP CODE GOES HERE!!!!!
 		readSensors(100);
-		driveDirect(1000,1000);
+
 		int[] lightBumpReadings = getLightBumps();
-		if (lightBumpReadings[2]>0 && lightBumpReadings[3]>0 && lightBumpReadings[1]>0) {
-			driveDirect(1000,-1000);
-			sleep(725);
-			}
+		driveDirect(250,100);
+		if (lightBumpReadings[2]>0 && lightBumpReadings[3]>0) {
+			driveDirect(-200,-200);
+			sleep(1000);
+			driveDirect(-200,200);
+			sleep(500);
+		}
+		if (lightBumpReadings[5]>0) {
+			driveDirect(-200,200);
+			sleep(300);
+			
+		}
 		
 		return true;
 	}
