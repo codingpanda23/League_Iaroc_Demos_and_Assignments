@@ -6,17 +6,17 @@ import org.jointheleague.ecolban.rpirobot.IRobotAdapter;
 import org.jointheleague.ecolban.rpirobot.IRobotInterface;
 import org.jointheleague.ecolban.rpirobot.SimpleIRobot;
 
-public class MazeCode extends IRobotAdapter {
+public class GoldRushCode extends IRobotAdapter {
 	Sonar sonar = new Sonar();
 	
-	public MazeCode(IRobotInterface iRobot) {
+	public GoldRushCode(IRobotInterface iRobot) {
 		super(iRobot);
 	}
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Try event listner, rev Monday 2030");
 		IRobotInterface base = new SimpleIRobot();
-		MazeCode rob = new MazeCode(base);
+		GoldRushCode rob = new GoldRushCode(base);
 		rob.setup();
 		while(rob.loop()){}
 		rob.shutDown();
@@ -33,20 +33,32 @@ public class MazeCode extends IRobotAdapter {
 	private boolean loop() throws Exception{
 		//LOOP CODE GOES HERE!!!!!
 		readSensors(100);
-
+		
 		int[] lightBumpReadings = getLightBumps();
-		driveDirect(350,200);
-		if (lightBumpReadings[2]>0 || lightBumpReadings[3]>0) {
-			driveDirect(-300,-300);
-			sleep(800);
-			driveDirect(-300,300);
-			sleep(800);
-		}
-		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0 || lightBumpReadings[0]>0) {
-			driveDirect(-300,300);
+		if(lightBumpReadings[3]>0 || lightBumpReadings[2]>0 || lightBumpReadings[1]>0 || lightBumpReadings[4]>0 || lightBumpReadings[5]>0 || lightBumpReadings[0]>0){
+			driveDirect(-500,-500);
 			sleep(200);
-			
+			driveDirect(-500,500);
+			sleep(300);
 		}
+		
+		if(getInfraredByteLeft() > 0){
+			driveDirect(500, 600);
+			sleep(1500);
+		}else if(getInfraredByteRight() > 0){
+			driveDirect(600, 500);
+			sleep(1500);
+		}else{
+			driveDirect(500, 550);
+		}	
+
+		if(isHomeBaseChargerAvailable()){
+			driveDirect(0, 0);
+			
+			return false;
+		}
+
+
 		
 		return true;
 	}
@@ -66,3 +78,4 @@ public class MazeCode extends IRobotAdapter {
 		closeConnection();
 	}
 }
+
