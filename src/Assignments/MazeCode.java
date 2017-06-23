@@ -33,20 +33,31 @@ public class MazeCode extends IRobotAdapter {
 	private boolean loop() throws Exception{
 		//LOOP CODE GOES HERE!!!!!
 		readSensors(100);
-
 		int[] lightBumpReadings = getLightBumps();
-		driveDirect(350,200);
-		if (lightBumpReadings[2]>0 || lightBumpReadings[3]>0) {
-			driveDirect(-300,-300);
-			sleep(800);
-			driveDirect(-300,300);
-			sleep(800);
+		
+		driveDirect(450,400);
+		
+		if (isBumpLeft() && isBumpRight()) {
+			driveDirect(-400,-400);
+			sleep(10);
+			driveDirect(-400,400);
+			sleep(10);
 		}
-		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0 || lightBumpReadings[0]>0) {
-			driveDirect(-300,300);
-			sleep(200);
+		
+		if(lightBumpReadings[2]>0 || lightBumpReadings[3]>0){
+			driveDirect(-400,-400);
+			sleep(10);
+			driveDirect(-400,400);
+			sleep(10);
+		}
+		
+		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0 || lightBumpReadings[0]>0 || lightBumpReadings[1]>0) {
+			driveDirect(-400,400);
+			sleep(10);
 			
 		}
+	
+
 		
 		return true;
 	}
