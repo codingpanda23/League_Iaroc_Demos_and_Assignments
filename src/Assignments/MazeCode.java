@@ -35,31 +35,24 @@ public class MazeCode extends IRobotAdapter {
 		readSensors(100);
 		int[] lightBumpReadings = getLightBumps();
 		
-		driveDirect(450,400);
+		driveDirect(350,250);
+		if(lightBumpReadings[2]>0){
+			driveDirect(-300,-300);
+			sleep(500);
+			driveDirect(300,-300);
+			sleep(500);
 		
-		if (isBumpLeft() && isBumpRight()) {
-			driveDirect(-400,-400);
-			sleep(10);
-			driveDirect(-400,400);
-			sleep(10);
-		}
-		
-		if(lightBumpReadings[2]>0 || lightBumpReadings[3]>0){
-			driveDirect(-400,-400);
-			sleep(10);
-			driveDirect(-400,400);
-			sleep(10);
-		}
-		
-		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0 || lightBumpReadings[0]>0 || lightBumpReadings[1]>0) {
-			driveDirect(-400,400);
-			sleep(10);
+		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0 || lightBumpReadings[3]>0) {
+			driveDirect(300,-300);
+			sleep(500);
 			
 		}
 	
-
 		
+		}
 		return true;
+		
+		
 	}
 	
 	private void sleep(int amt){

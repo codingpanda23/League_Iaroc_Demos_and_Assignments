@@ -33,12 +33,26 @@ public class AssignmentCode extends IRobotAdapter {
 	private boolean loop() throws Exception{
 		//LOOP CODE GOES HERE!!!!!
 		readSensors(100);
-		driveDirect(1000,1000);
+		driveDirect(500,500);
 		int[] lightBumpReadings = getLightBumps();
-		if (lightBumpReadings[2]>0 && lightBumpReadings[3]>0 && lightBumpReadings[1]>0) {
-			driveDirect(1000,-1000);
-			sleep(725);
+		if (lightBumpReadings[2]>0 || lightBumpReadings[3]>0 ) {
+			driveDirect(500,-500);
+			sleep(825);
+		}
+		if(lightBumpReadings[0]>0 || lightBumpReadings[1]>0){
+			driveDirect(-500,-500);
+			sleep(250);
+			driveDirect(500,-500);
+			sleep(150);
 			}
+		
+		if (lightBumpReadings[4]>0 || lightBumpReadings[5]>0) {
+			driveDirect(-500,-500);
+			sleep(250);
+			driveDirect(-500,500);
+			sleep(150);
+		}
+		
 		
 		return true;
 	}
