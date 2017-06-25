@@ -35,30 +35,29 @@ public class GoldRushCode extends IRobotAdapter {
 		readSensors(100);
 		int[] lightBumpReadings = getLightBumps();
 		
-		driveDirect(500,450);
+		driveDirect(400,300);
 		
 		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0) {
-			driveDirect(-500,500);
-			sleep(1000);
+			driveDirect(-400,400);
+			sleep(200);
 		}
 		if (lightBumpReadings[0]>0 || lightBumpReadings[1]>0) {
-			driveDirect(500,-500);
-			sleep(1000);
+			driveDirect(400,-400);
+			sleep(200);
 		}
-		if (lightBumpReadings[2]>0 || lightBumpReadings[3]>0) {
-			driveDirect(-500,-500);
-			sleep(1000);
-			driveDirect(500,450);
+		if (lightBumpReadings[3]>0 || lightBumpReadings[2]>0) {
+			driveDirect(-400,-400);
+			sleep(500);
 		}
 		
 		if(getInfraredByteLeft() > 0){
-			driveDirect(500, 600);
-			sleep(1500);
+			driveDirect(400, 500);
+			sleep(1300);
 		}else if(getInfraredByteRight() > 0){
-			driveDirect(600, 500);
-			sleep(1500);
+			driveDirect(500, 400);
+			sleep(1300);
 		}else{
-			driveDirect(500, 550);
+			driveDirect(400, 450);
 		}	
 
 		if(isHomeBaseChargerAvailable()){
