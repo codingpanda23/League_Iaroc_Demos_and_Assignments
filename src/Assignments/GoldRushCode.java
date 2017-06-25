@@ -33,13 +33,22 @@ public class GoldRushCode extends IRobotAdapter {
 	private boolean loop() throws Exception{
 		//LOOP CODE GOES HERE!!!!!
 		readSensors(100);
-		
 		int[] lightBumpReadings = getLightBumps();
-		if(lightBumpReadings[3]>0 || lightBumpReadings[2]>0 || lightBumpReadings[1]>0 || lightBumpReadings[4]>0 || lightBumpReadings[5]>0 || lightBumpReadings[0]>0){
-			driveDirect(-500,-500);
-			sleep(200);
+		
+		driveDirect(500,450);
+		
+		if (lightBumpReadings[5]>0 || lightBumpReadings[4]>0) {
 			driveDirect(-500,500);
-			sleep(300);
+			sleep(1000);
+		}
+		if (lightBumpReadings[0]>0 || lightBumpReadings[1]>0) {
+			driveDirect(500,-500);
+			sleep(1000);
+		}
+		if (lightBumpReadings[2]>0 || lightBumpReadings[3]>0) {
+			driveDirect(-500,-500);
+			sleep(1000);
+			driveDirect(500,450);
 		}
 		
 		if(getInfraredByteLeft() > 0){
